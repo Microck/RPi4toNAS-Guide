@@ -109,8 +109,6 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 
 Connect to your Pi via SSH and run the following commands:
 
-![LVM Commands](https://github.com/user-attachments/assets/01234567-89ab-cdef-0123-456789abcdef)
-
 ```bash
 # Install the LVM2 package
 sudo apt install lvm2 -y
