@@ -81,7 +81,9 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - In the **Services** tab, enable **SSH** and select "Use password authentication".
     - Click **Save**, then **Write** to flash the OS.
 
+<p align="center">
 <img src=https://github.com/user-attachments/assets/659f313b-4941-4104-956f-21c9b8e19e43 width="600"/>
+</p>
 
 2.  **Boot and Connect:**
     - Insert the microSD card into the Raspberry Pi and power it on. **For the initial OMV installation, connect the Pi to your router via an Ethernet cable to avoid setup issues.**
@@ -102,9 +104,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Once the script finishes, open a web browser and navigate to the Raspberry Pi's IP address.
     - Log in with the default credentials: username `admin` and password `openmediavault`.
     - Immediately navigate to **System -> General Settings -> Web Administrator Password** to change the default password.
-<p align="center">
+
 <img src="https://github.com/user-attachments/assets/5dba2907-ad57-4b4a-a25e-f185d6c378c4"/>
-</p>
 
 ### Phase 4: Storage Configuration
 
