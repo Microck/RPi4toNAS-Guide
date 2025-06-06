@@ -247,7 +247,7 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
   Once deployed, your remote desktop will be accessible at `http://<your-pi-ip>:3000`.
     </details>
 
-![Screenshot_1172](https://github.com/user-attachments/assets/c737b4ee-f308-4cf7-a3db-e8ffea95beef)
+![Portainer](https://github.com/user-attachments/assets/c737b4ee-f308-4cf7-a3db-e8ffea95beef)
 
 
 ## Scripts & Automation
@@ -266,6 +266,9 @@ To simplify setup, this repository includes a `configure_all.bat` script for Win
 3.  Choose a script to generate from the menu.
 4.  Follow the on-screen prompts.
 5.  The configured script will be saved in the same directory, ready to be copied to your NAS.
+
+![configure_all.bat](https://github.com/user-attachments/assets/ede502b1-01a8-4c1e-96a0-24a78d769173)
+
 
 ### Main PC Backup Script
 
