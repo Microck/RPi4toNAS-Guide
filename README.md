@@ -279,10 +279,14 @@ To simplify setup, this repository includes a `configure_all.bat` script for Win
 This script handles the complete backup process for a Windows PC. It wakes the PC, mounts its drives, runs `rsync`, and shuts it down.
 
 <details>
-  <summary>Click to show `backup_main_pc.sh`</summary>
+  <summary>
+    ```diff
++ ► Click to show `backup_main_pc.sh`
+    ```
+  </summary>
 
-```bash
-#!/bin/bash
+  ```bash
+  #!/bin/bash
 
 MAIN_PC_MAC="YOUR_MAIN_PC_MAC_ADDRESS_HERE"
 MAIN_PC_IP="YOUR_MAIN_PC_IP_ADDRESS_HERE"
@@ -562,10 +566,14 @@ fi
 This script connects to a remote server via SSH, creates a compressed backup, downloads it, and cleans up the remote file.
 
 <details>
-  <summary>Click to show `minecraft_download.sh`</summary>
+  <summary>
+    ```diff
++ ► Click to show `minecraft_download.sh`
+    ```
+  </summary>
 
-```bash
-#!/bin/bash
+  ```bash
+  #!/bin/bash
 
 ORACLE_USER="YOUR_ORACLE_SERVER_USERNAME_HERE"
 ORACLE_IP="YOUR_ORACLE_SERVER_IP_ADDRESS_HERE"
@@ -674,10 +682,14 @@ fi
 This script checks the total size of the Minecraft backup directory and deletes the oldest backups if it exceeds a defined limit.
 
 <details>
-  <summary>Click to show `minecraft_rotation.sh`</summary>
+  <summary>
+    ```diff
++ ► Click to show `minecraft_rotation.sh`
+    ```
+  </summary>
 
-```bash
-#!/bin/bash
+  ```bash
+  #!/bin/bash
 
 LVM_MOUNT_BASE="YOUR_NAS_LVM_BASE_MOUNT_PATH_HERE"
 MINECRAFT_BACKUPS_SUBDIR_NAME_FOR_ROTATION="YOUR_MINECRAFT_BACKUPS_SUBDIRECTORY_NAME_FOR_ROTATION_HERE"
@@ -738,7 +750,11 @@ exit 0
 These files contain lists of patterns for `rsync` to ignore, preventing unnecessary system files, caches, and temporary files from being backed up. Place them in `/etc/rsync/` on your Raspberry Pi.
 
 <details>
-  <summary>Click to show `windows-c-drive-excludes.txt`</summary>
+  <summary>
+    ```diff
++ ► Click to show `windows-c-drive-excludes.txt`
+    ```
+  </summary>
 
 ```
 # System files & Recycle Bin
@@ -821,7 +837,11 @@ desktop.ini
 </details>
 
 <details>
-  <summary>Click to show `windows-d-drive-excludes.txt`</summary>
+  <summary>
+    ```diff
++ ► Click to show `windows-d-drive-excludes.txt`
+    ```
+  </summary>
 
 ```
 $RECYCLE.BIN/
