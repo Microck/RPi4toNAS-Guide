@@ -1,6 +1,6 @@
 # DIY Raspberry Pi NAS: Automated Backup & Remote Desktop
 
-A comprehensive guide and set of scripts for creating a personal, low-cost Network Attached Storage (NAS) with a Raspberry Pi. This project automates backups from your PC and remote servers, and provides a persistent remote desktop environment.
+A comprehensive guide and set of scripts for creating a personal, low-cost Network Attached Storage (NAS) device using a Raspberry Pi 4. This project automates backups from your PC and remote servers, and provides a persistent, browser-accessible remote Linux desktop.
 
 This guide is based on the process detailed in the **[accompanying video tutorial](https://www.youtube.com/watch?v=your_video_link_here)**.
 
@@ -109,6 +109,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 
 Connect to your Pi via SSH and run the following commands:
 
+![LVM Commands](https://github.com/user-attachments/assets/01234567-89ab-cdef-0123-456789abcdef)
+
 ```bash
 # Install the LVM2 package
 sudo apt install lvm2 -y
@@ -156,6 +158,8 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Find the `AutoShareWks` DWORD value. If it doesn't exist, right-click -> `New` -> `DWORD (32-bit) Value` and name it `AutoShareWks`.
     - Double-click `AutoShareWks` and set its value to `1`.
     - Restart your PC for the change to take effect.
+
+![Windows Registry Editor showing AutoShareWks](https://github.com/user-attachments/assets/ac62c199-7d39-47af-9054-f38b34d3d82c)
 
 ## Optional: Remote Desktop Setup (Docker & Webtop)
 
