@@ -211,7 +211,7 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
 
 4.  **Deploy Webtop**
 
-Now that Portainer is running, you can use its web interface to deploy the Webtop container. This method allows for detailed, granular control over the container's configuration.
+  Now that Portainer is running, you can use its web interface to deploy the Webtop container. This method allows for detailed, granular control over the container's configuration.
 
 1.  **Access Portainer and Navigate**
     - Open the Portainer UI in your browser (e.g., `https://<your-pi-ip>:9443`).
@@ -244,9 +244,12 @@ Now that Portainer is running, you can use its web interface to deploy the Webto
 3.  **Deploy the Container**
     - Click the **Deploy the container** button.
 
-Once deployed, your remote desktop will be accessible at `http://<your-pi-ip>:3000`.
+  Once deployed, your remote desktop will be accessible at `http://<your-pi-ip>:3000`.
     ```
     </details>
+
+![Screenshot_1172](https://github.com/user-attachments/assets/c737b4ee-f308-4cf7-a3db-e8ffea95beef)
+
 
 ## Scripts & Automation
 
