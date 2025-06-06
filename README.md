@@ -280,9 +280,7 @@ This script handles the complete backup process for a Windows PC. It wakes the P
 
 <details>
   <summary>
-    ```diff
-    + Click to show `backup_main_pc.sh`
-    ```
+► Click to show `backup_main_pc.sh`
   </summary>
 
   ```bash
@@ -567,9 +565,7 @@ This script connects to a remote server via SSH, creates a compressed backup, do
 
 <details>
   <summary>
-    ```diff
-+ ► Click to show `minecraft_download.sh`
-    ```
+► Click to show `minecraft_download.sh`
   </summary>
 
   ```bash
@@ -683,9 +679,7 @@ This script checks the total size of the Minecraft backup directory and deletes 
 
 <details>
   <summary>
-    ```diff
-+ ► Click to show `minecraft_rotation.sh`
-    ```
+► Click to show `minecraft_rotation.sh`
   </summary>
 
   ```bash
@@ -750,10 +744,7 @@ exit 0
 These files contain lists of patterns for `rsync` to ignore, preventing unnecessary system files, caches, and temporary files from being backed up. Place them in `/etc/rsync/` on your Raspberry Pi.
 
 <details>
-  <summary>
-    ```diff
-+ ► Click to show `windows-c-drive-excludes.txt`
-    ```
+► Click to show `windows-c-drive-excludes.txt`
   </summary>
 
 ```
@@ -838,9 +829,7 @@ desktop.ini
 
 <details>
   <summary>
-    ```diff
-+ ► Click to show `windows-d-drive-excludes.txt`
-    ```
+► Click to show `windows-d-drive-excludes.txt`
   </summary>
 
 ```
