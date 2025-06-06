@@ -103,7 +103,7 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Log in with the default credentials: username `admin` and password `openmediavault`.
     - Immediately navigate to **System -> General Settings -> Web Administrator Password** to change the default password.
 
-![Screenshot_1170](https://github.com/user-attachments/assets/5dba2907-ad57-4b4a-a25e-f185d6c378c4)
+<img src="https://github.com/user-attachments/assets/5dba2907-ad57-4b4a-a25e-f185d6c378c4" width="600"/>
 
 
 ### Phase 4: Storage Configuration
