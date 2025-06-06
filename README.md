@@ -169,8 +169,9 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Double-click `AutoShareWks` and set its value to `1`.
     - Restart your PC for the change to take effect.
 
-![Screenshot_1165](https://github.com/user-attachments/assets/5a63cbd6-5ad7-41c0-bc42-d89900995643)
-
+<p align="center">
+<img src=https://github.com/user-attachments/assets/5a63cbd6-5ad7-41c0-bc42-d89900995643 width="600"/>
+</p>
 
 ## Optional: Remote Desktop Setup (Docker & Webtop)
 
@@ -268,7 +269,9 @@ To simplify setup, this repository includes a `configure_all.bat` script for Win
 4.  Follow the on-screen prompts.
 5.  The configured script will be saved in the same directory, ready to be copied to your NAS.
 
-![configure_all.bat](https://github.com/user-attachments/assets/ede502b1-01a8-4c1e-96a0-24a78d769173)
+<p align="center">
+<img src=https://github.com/user-attachments/assets/ede502b1-01a8-4c1e-96a0-24a78d769173 width="600"/>
+</p>
 
 
 ### Main PC Backup Script
