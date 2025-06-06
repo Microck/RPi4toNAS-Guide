@@ -103,7 +103,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Log in with the default credentials: username `admin` and password `openmediavault`.
     - Immediately navigate to **System -> General Settings -> Web Administrator Password** to change the default password.
 
-    ![OMV Login Screen](https://github.com/user-attachments/assets/e2516f5b-d1d0-41a5-b070-dc090034d1d9)
+![Screenshot_1170](https://github.com/user-attachments/assets/5dba2907-ad57-4b4a-a25e-f185d6c378c4)
+
 
 ### Phase 4: Storage Configuration
 
@@ -112,8 +113,6 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 **Logical Volume Management (LVM)** is a powerful tool that allows you to abstract your physical hard drives into a flexible pool of storage. We will use it to combine our two physical disks into one large, manageable volume.
 
 Connect to your Pi via SSH and run the following commands:
-
-![LVM Commands](https://github.com/user-attachments/assets/01234567-89ab-cdef-0123-456789abcdef)
 
 ```bash
 # Install the LVM2 package
@@ -148,7 +147,8 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Go to the **Shares** tab and click **Create**.
     - For each shared folder you created, create a corresponding SMB share. Make sure to set permissions as needed and enable the "Browseable" option if you want it to appear automatically in your network explorer.
 
-    ![OMV SMB Shares](https://github.com/user-attachments/assets/3051cb5f-dd36-46be-957b-8400ab498db7)
+![Screenshot_1169](https://github.com/user-attachments/assets/5346ac18-1fb5-4421-a745-2209c0211663)
+
 
 ### Phase 5: Host PC Configuration
 
@@ -158,7 +158,8 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Find the setting for "Wake on LAN" or "Power On By PCI-E/PCI" and enable it. This location varies by motherboard manufacturer.
     - Save changes and exit.
 
-    ![BIOS WOL Setting](https://github.com/user-attachments/assets/1c93c04b-7886-451e-8774-d3a7ad86d45d)
+![asusbios1](https://github.com/user-attachments/assets/a7d84e79-aec7-43e1-8329-df1654d90931)
+
 
 2.  **Enable Administrative Shares:**
     - On your Windows PC, open the Registry Editor (`regedit`).
@@ -167,7 +168,8 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Double-click `AutoShareWks` and set its value to `1`.
     - Restart your PC for the change to take effect.
 
-    ![Windows Registry Editor showing AutoShareWks](https://github.com/user-attachments/assets/ac62c199-7d39-47af-9054-f38b34d3d82c)
+![Screenshot_1165](https://github.com/user-attachments/assets/5a63cbd6-5ad7-41c0-bc42-d89900995643)
+
 
 ## Optional: Remote Desktop Setup (Docker & Webtop)
 
