@@ -281,7 +281,7 @@ This script handles the complete backup process for a Windows PC. It wakes the P
 <details>
   <summary>
     ```diff
-+ ► Click to show `backup_main_pc.sh`
+    + Click to show `backup_main_pc.sh`
     ```
   </summary>
 
