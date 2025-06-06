@@ -210,32 +210,40 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     </details>
 
 4.  **Deploy Webtop:**
-    - Access the Portainer UI at `https://<your-pi-ip>:9443`. Complete the initial setup.
-    - Go to **Stacks -> Add stack**.
-    - Name it `webtop` and paste the content below, again replacing the volume path.
-    - Click **Deploy the stack**. You can now access your remote desktop at `http://<your-pi-ip>:3000`.
+  Now that Portainer is running, you can use its web interface to deploy the Webtop container. This method allows for detailed, granular control over the container's configuration.
 
-    <details>
-      <summary>Click to show `webtop-compose.yml`</summary>
+  1.  **Access Portainer and Navigate:**
+    - Open the Portainer UI in your browser (e.g., `https://<your-pi-ip>:9443`).
+    - After logging in, click on your **local** Docker environment.
+    - In the left-hand menu, navigate to **Containers**, then click the **+ Add container** button.
 
-    ```yaml
-    version: "2.1"
-    services:
-      webtop:
-        image: lscr.io/linuxserver/webtop:latest
-        container_name: webtop
-        security_opt:
-          - seccomp:unconfined # Required for Docker in Docker
-        environment:
-          - PUID=1000
-          - PGID=1000
-          - TZ=Etc/UTC
-        volumes:
-          - /srv/dev-disk-by-uuid-xxxxxxxx/RemoteSystemData/WebtopConfig:/config
-          - /var/run/docker.sock:/var/run/docker.sock # Optional: For Docker in Docker
-        ports:
-          - "3000:3000"
-        restart: unless-stopped
+  2.  **Configure the Webtop Container:**
+    - **Name:** `webtop-arm64-ubuntu-xfce`
+    - **Image:** `lscr.io/linuxserver/webtop:arm64v8-ubuntu-xfce`
+      > *Note: This specific image tag provides an Ubuntu XFCE desktop environment optimized for ARM64 architecture. You can change it for your prefered one*
+    - **Publish a new network port:**
+      - **host:** `3000`
+      - **container:** `3000`
+      - **protocol:** TCP
+    - **Volumes:**
+      - Click **Map additional volume**.
+      - **container:** `/config`
+      - **host:** `/srv/dev-disk-by-uuid-xxxxxxxx/RemoteSystemData/WebtopFocalConfig`
+      > *Ensure this directory exists on your NAS before deploying.*
+    - **Env (Environment Variables):**
+      - Click **Add environment variable** for each of the following:
+        - `PUID`: `1000` (or the user ID of your Pi user)
+        - `PGID`: `100` (or the group ID of your Pi user)
+        - `TZ`: `Europe/Madrid` (or your region)
+        - `TITLE`: `Pi Remote Desktop`
+    - **Restart policy:** Select **Unless stopped**.
+    - **Runtime & resources:**
+      - Set any desired CPU or Memory limits to prevent Webtop from consuming all of your Pi's resources.
+
+  3.  **Deploy the Container:**
+    - Click the **Deploy the container** button.
+
+  Once deployed, your remote desktop will be accessible at `http://<your-pi-ip>:3000`.
     ```
     </details>
 
