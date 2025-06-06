@@ -25,8 +25,6 @@ This guide is based on the process detailed in the **[accompanying video tutoria
   - [Backup Rotation Script](#backup-rotation-script)
   - [Rsync Exclude Files](#rsync-exclude-files)
 - [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [Credits](#credits)
 - [License](#license)
 
 ## Project Overview
@@ -53,7 +51,7 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 > [!IMPORTANT]
 > **Power is Critical**:
 > - **3.5" HDDs** require more power (6-12W) and both 5V and 12V lines. They **must** be powered externally via their SATA-to-USB adapters; a USB hub alone is not sufficient.
-> - **2.5" HDDs** require less power (~6W) and can often be powered by a high-quality, sufficiently-powered USB hub.
+> - **2.5" HDDs** require less power (~5W) and can often be powered by a high-quality, sufficiently-powered USB hub.
 
 ## Software Requirements
 
@@ -70,7 +68,6 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 2.  **Assemble the Rig:** Follow the assembly instructions for your chosen enclosure. Mount the Raspberry Pi, fan, and hard drives securely.
 3.  **Connect Cables:** Connect the HDDs to their SATA-to-USB adapters. Plug the adapters' power cables into a power strip and their USB cables into the powered USB hub. Connect the USB hub to one of the Raspberry Pi's USB 3.0 ports (the blue ones).
 
-> **Suggested Screenshot:** The `BitBot Kit Assembly Instructions` graphic from `03:54` in the video.
 
 ### Phase 2: Initial Raspberry Pi Setup
 
@@ -84,14 +81,13 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - In the **Services** tab, enable **SSH** and select "Use password authentication".
     - Click **Save**, then **Write** to flash the OS.
 
-> **Suggested Screenshot:** The Raspberry Pi Imager's OS pre-configuration dialog, as seen at `05:57`.
+![Imager](https://github.com/user-attachments/assets/659f313b-4941-4104-956f-21c9b8e19e43)
+
 
 2.  **Boot and Connect:**
     - Insert the microSD card into the Raspberry Pi and power it on. **For the initial OMV installation, connect the Pi to your router via an Ethernet cable to avoid setup issues.**
     - On your PC, open a command prompt and use `nmap -sn YOUR_NETWORK_IP/24` (e.g., `192.168.1.0/24`) to find the IP address of the Raspberry Pi.
     - Open PuTTY, enter the Pi's IP address, and connect via SSH. Log in with the username and password you created.
-
-> **Suggested Screenshot:** The terminal output from the `nmap` command successfully identifying the Raspberry Pi's IP address, as shown at `06:32`.
 
 ### Phase 3: OpenMediaVault (OMV) Installation
 
@@ -108,7 +104,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Log in with the default credentials: username `admin` and password `openmediavault`.
     - Immediately navigate to **System -> General Settings -> Web Administrator Password** to change the default password.
 
-> **Suggested Screenshot:** The OpenMediaVault login page, as seen at `06:52`.
+![Screenshot_1170](https://github.com/user-attachments/assets/e2516f5b-d1d0-41a5-b070-dc090034d19d)
+
 
 ### Phase 4: Storage Configuration
 
@@ -127,7 +124,9 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Go to the **Shares** tab and click **Create**.
     - For each shared folder you created, create a corresponding SMB share. Make sure to set permissions as needed and enable the "Browseable" option if you want it to appear automatically in your network explorer.
 
-> **Suggested Screenshot:** The final list of configured SMB shares in the OMV interface, as seen at `07:58`.
+![Screenshot_1169](https://github.com/user-attachments/assets/3051cb5f-dd36-46be-957b-8400ab498db7)
+
+
 
 ### Phase 5: Host PC Configuration
 
@@ -136,7 +135,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Find the setting for "Wake on LAN" or "Power On By PCI-E/PCI" and enable it. This location varies by motherboard manufacturer.
     - Save changes and exit.
 
-> **Suggested Screenshot:** The BIOS/UEFI screen where the Wake-on-LAN feature is enabled, similar to `08:28`.
+![BIOS](https://github.com/user-attachments/assets/1c93c04b-7886-451e-8774-d3a7ad86d45d)
+
 
 2.  **Enable Administrative Shares:**
     - On your Windows PC, open the Registry Editor (`regedit`).
@@ -146,7 +146,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Double-click it and set its value to `1`.
     - Restart your PC for the change to take effect.
 
-> **Suggested Screenshot:** The Windows Registry Editor showing the `LocalAccountTokenFilterPolicy` key and its value, as seen at `12:11`.
+![Registry](https://github.com/user-attachments/assets/ac62c199-7d39-47af-9054-f38b34d3d82c)
+
 
 ## Scripts & Automation
 
@@ -742,17 +743,6 @@ desktop.ini
 -   **OMV Plugin Failures:** If a newly installed plugin is not working, try disabling the NTP server.
     -   In the OMV UI, go to **System -> Date & Time** and uncheck "Use NTP server".
 
-> **Suggested Screenshot:** A composite image showing the four main troubleshooting points: the hard drive with "chirp noises" text (`11:09`), the `lsusb` output (`11:44`), the `mount error(13)` message (`12:04`), and the OMV Date & Time settings (`12:22`).
-
-## Contributing
-
-Feedback, bug reports, and pull requests are welcome! Please check the [issues page](https://github.com/your_username/your_repo/issues) or start a [discussion](https://github.com/your_username/your_repo/discussions).
-
-## Credits
-
--   This project was inspired by and built upon the knowledge shared in the original [video tutorial](https://www.youtube.com/watch?v=your_video_link_here).
--   Scripts were developed with assistance from the **Gemini 2.5 Pro** model.
--   Thanks to the communities behind **OpenMediaVault**, **Raspberry Pi**, and **Docker**.
 
 ## License
 
