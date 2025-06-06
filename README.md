@@ -220,7 +220,7 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
   2.  **Configure the Webtop Container:**
     - **Name:** `webtop-arm64-ubuntu-xfce`
     - **Image:** `lscr.io/linuxserver/webtop:arm64v8-ubuntu-xfce`
-      > *Note: This specific image tag provides an Ubuntu XFCE desktop environment optimized for ARM64 architecture. You can change it for your prefered one*
+      *Note: This specific image tag provides an Ubuntu XFCE desktop environment optimized for ARM64 architecture. You can change it for your prefered one*
     - **Publish a new network port:**
       - **host:** `3000`
       - **container:** `3000`
@@ -229,7 +229,7 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
       - Click **Map additional volume**.
       - **container:** `/config`
       - **host:** `/srv/dev-disk-by-uuid-xxxxxxxx/RemoteSystemData/WebtopFocalConfig`
-      > *Ensure this directory exists on your NAS before deploying.*
+      > *Ensure this directory exists on your NAS before deploying.*         
     - **Env (Environment Variables):**
       - Click **Add environment variable** for each of the following:
         - `PUID`: `1000` (or the user ID of your Pi user)
