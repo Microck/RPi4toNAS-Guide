@@ -1,11 +1,11 @@
 # DIY Raspberry Pi NAS: Automated Backup & Remote Desktop
 
-This repository contains all the necessary scripts, instructions, and resources to build a powerful, low-cost Network Attached Storage (NAS) device using a Raspberry Pi 4. This project automates backups from a Windows PC and a remote VPS, and provides a persistent, browser-accessible remote Linux desktop.
+A comprehensive guide and set of scripts for creating a personal, low-cost Network Attached Storage (NAS) with a Raspberry Pi. This project automates backups from your PC and remote servers, and provides a persistent remote desktop environment.
 
 This guide is based on the process detailed in the **[accompanying video tutorial](https://www.youtube.com/watch?v=your_video_link_here)**.
 
-
-> A photo of the final, assembled NAS rig.
+![Final Assembled NAS](https://github.com/user-attachments/assets/d1a2b3c4-d5e6-f7a8-b9c0-d1e2f3a4b5c6)
+> *The final assembled NAS rig, ready for action.*
 
 ## Table of Contents
 
@@ -18,6 +18,7 @@ This guide is based on the process detailed in the **[accompanying video tutoria
   - [Phase 3: OpenMediaVault (OMV) Installation](#phase-3-openmediavault-omv-installation)
   - [Phase 4: Storage Configuration](#phase-4-storage-configuration)
   - [Phase 5: Host PC Configuration](#phase-5-host-pc-configuration)
+- [Optional: Remote Desktop Setup (Docker & Webtop)](#optional-remote-desktop-setup-docker--webtop)
 - [Scripts & Automation](#scripts--automation)
   - [Configuration Helper (`configure_all.bat`)](#configuration-helper-configure_allbat)
   - [Main PC Backup Script](#main-pc-backup-script)
@@ -37,16 +38,16 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 
 ## Hardware Requirements
 
-| Component | Model/Type | Quantity | Notes |
+| Component | Model/Type | Quantity | Purchase Links |
 | :--- | :--- | :--- | :--- |
-| **SBC** | Raspberry Pi 4 (4GB+) | 1 | The core of the NAS. |
-| **Storage** | 3.5" SATA HDD | 2+ | This guide uses two 3TB Seagate Barracuda drives. |
-| **Power Supply** | Official Raspberry Pi 4 PSU | 1 | Crucial for stability. Third-party cables can cause power issues. |
-| **Adapters** | USB 3.0 to SATA Adapter | 2+ | Must have an external power input for 3.5" drives. |
-| **USB Hub** | Powered USB 3.0 Hub | 1 | To connect drives to the Pi. Ensure it provides enough power. |
-| **Enclosure** | 3D-Printed Case | 1 | Files for the specific model are in this repo. Many alternatives exist on sites like Thingiverse. |
-| **SD Card** | microSD Card (16GB+) | 1 | For the Raspberry Pi's operating system. |
-| **Cooling** | 30mm Fan | 1 | Optional but recommended to prevent thermal throttling. |
+| **SBC** | Raspberry Pi 4 (4GB+) | 1 | [Link](https://www.amazon.com/dp/your_link_here) |
+| **Storage** | 3.5" SATA HDD | 2+ | [Link](https://www.amazon.com/dp/your_link_here) |
+| **Power Supply** | Official Raspberry Pi 4 PSU | 1 | [Link](https://www.amazon.com/dp/your_link_here) |
+| **Adapters** | USB 3.0 to SATA Adapter | 2+ | [Link](https://www.amazon.com/dp/your_link_here) |
+| **USB Hub** | Powered USB 3.0 Hub | 1 | [Link](https://www.amazon.com/dp/your_link_here) |
+| **Enclosure** | 3D-Printed Case | 1 | [Thingiverse Link](https://www.thingiverse.com/thing:your_link_here) |
+| **SD Card** | microSD Card (16GB+) | 1 | [Link](https://www.amazon.com/dp/your_link_here) |
+| **Cooling** | 30mm Fan | 1 | [Link](https://www.amazon.com/dp/your_link_here) |
 
 > [!IMPORTANT]
 > **Power is Critical**:
@@ -68,7 +69,6 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 2.  **Assemble the Rig:** Follow the assembly instructions for your chosen enclosure. Mount the Raspberry Pi, fan, and hard drives securely.
 3.  **Connect Cables:** Connect the HDDs to their SATA-to-USB adapters. Plug the adapters' power cables into a power strip and their USB cables into the powered USB hub. Connect the USB hub to one of the Raspberry Pi's USB 3.0 ports (the blue ones).
 
-
 ### Phase 2: Initial Raspberry Pi Setup
 
 1.  **Flash Raspberry Pi OS:**
@@ -80,9 +80,6 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - In the **General** tab, set a hostname, and create a username and password.
     - In the **Services** tab, enable **SSH** and select "Use password authentication".
     - Click **Save**, then **Write** to flash the OS.
-
-![Imager](https://github.com/user-attachments/assets/659f313b-4941-4104-956f-21c9b8e19e43)
-
 
 2.  **Boot and Connect:**
     - Insert the microSD card into the Raspberry Pi and power it on. **For the initial OMV installation, connect the Pi to your router via an Ethernet cable to avoid setup issues.**
@@ -104,50 +101,129 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Log in with the default credentials: username `admin` and password `openmediavault`.
     - Immediately navigate to **System -> General Settings -> Web Administrator Password** to change the default password.
 
-![Screenshot_1170](https://github.com/user-attachments/assets/e2516f5b-d1d0-41a5-b070-dc090034d19d)
-
-
 ### Phase 4: Storage Configuration
 
-1.  **Create LVM Pool:** To combine your two physical drives into one large volume:
-    - In the OMV UI, go to **Storage -> Logical Volume Management**.
-    - Go to the **Physical Volumes** tab and click **Create** to add both of your HDDs.
-    - Go to the **Volume Groups** tab and click **Create**. Give the group a name (e.g., `NASDataPool`) and select both physical volumes.
-2.  **Create File System:**
-    - Go to **Storage -> File Systems** and click **Create**.
-    - Select your newly created LVM volume group. Give it a label and choose the **EXT4** file system.
-3.  **Create Shared Folders:**
+#### 4a. Command-Line LVM Setup
+
+**Logical Volume Management (LVM)** is a powerful tool that allows you to abstract your physical hard drives into a flexible pool of storage. We will use it to combine our two physical disks into one large, manageable volume.
+
+Connect to your Pi via SSH and run the following commands:
+
+```bash
+# Install the LVM2 package
+sudo apt install lvm2 -y
+
+# Initialize your raw disks as LVM physical volumes (replace sda/sdb if needed)
+sudo pvcreate /dev/sda /dev/sdb
+
+# Create a volume group named 'nas_vg' using the physical volumes
+sudo vgcreate nas_vg /dev/sda /dev/sdb
+
+# Create a logical volume named 'data_lv' that uses 99% of the volume group's space
+sudo lvcreate -l 99%VG -n data_lv nas_vg
+
+# Format the new logical volume with the ext4 filesystem and label it 'NASDataPool'
+sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
+```
+
+#### 4b. OMV File System & Shares
+
+1.  **Mount File System:**
+    - In the OMV UI, go to **Storage -> File Systems**.
+    - Your new `NASDataPool` volume should appear. Select it and click **Mount**. Apply the changes when prompted.
+
+2.  **Create Shared Folders:**
     - Go to **Storage -> Shared Folders** and click **Create**.
-    - Create a separate folder for each purpose (e.g., `MainBackup`, `ImportantBackup`, `MinecraftBackups`, `RemoteSystemData`). For each, select your LVM file system and specify a relative path.
-4.  **Enable SMB/CIFS Shares:**
+    - Create a separate folder for each purpose (e.g., `MainBackup`, `ImportantBackup`, `MinecraftBackups`, `RemoteSystemData`). For each, select your `NASDataPool` file system and specify a relative path.
+
+3.  **Enable SMB/CIFS Shares:**
+    - **Server Message Block (SMB)** is a network protocol that allows Windows, macOS, and Linux devices to access shared files.
     - Go to **Services -> SMB/CIFS -> Settings** and enable the service.
     - Go to the **Shares** tab and click **Create**.
     - For each shared folder you created, create a corresponding SMB share. Make sure to set permissions as needed and enable the "Browseable" option if you want it to appear automatically in your network explorer.
 
-![Screenshot_1169](https://github.com/user-attachments/assets/3051cb5f-dd36-46be-957b-8400ab498db7)
-
-
-
 ### Phase 5: Host PC Configuration
 
 1.  **Enable Wake-on-LAN (WOL):**
+    - **Wake-on-LAN** is a network standard that allows a computer to be turned on or "woken up" by a network message.
     - Restart your Windows PC and enter the BIOS/UEFI settings.
     - Find the setting for "Wake on LAN" or "Power On By PCI-E/PCI" and enable it. This location varies by motherboard manufacturer.
     - Save changes and exit.
 
-![BIOS](https://github.com/user-attachments/assets/1c93c04b-7886-451e-8774-d3a7ad86d45d)
-
-
 2.  **Enable Administrative Shares:**
     - On your Windows PC, open the Registry Editor (`regedit`).
-    - Navigate to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`.
-    - Right-click in the right-hand pane, select `New` -> `DWORD (32-bit) Value`.
-    - Name the new value `LocalAccountTokenFilterPolicy`.
-    - Double-click it and set its value to `1`.
+    - Navigate to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters`.
+    - Find the `AutoShareWks` DWORD value. If it doesn't exist, right-click -> `New` -> `DWORD (32-bit) Value` and name it `AutoShareWks`.
+    - Double-click `AutoShareWks` and set its value to `1`.
     - Restart your PC for the change to take effect.
 
-![Registry](https://github.com/user-attachments/assets/ac62c199-7d39-47af-9054-f38b34d3d82c)
+## Optional: Remote Desktop Setup (Docker & Webtop)
 
+**Docker** is a platform for running applications in isolated environments called containers. We will use it to run **Portainer**, a web UI for managing Docker, and **Webtop**, a container that provides a full Linux desktop accessible from your browser.
+
+1.  **Install OMV-Extras:**
+    - In your OMV shell, run the following command to install `omv-extras`, which provides access to additional plugins, including Docker.
+      ```bash
+      wget -O - https://github.com/OpenMediaVault-Plugin-Developers/install-omv-extras/raw/master/install | sudo bash
+      ```
+2.  **Install Compose Plugin:**
+    - In the OMV UI, go to **System -> Plugins**.
+    - Search for and install the `openmediavault-compose` plugin. This will add a **Compose** section under **Services**.
+3.  **Deploy Portainer:**
+    - Navigate to **Services -> Compose -> Files** and click **Create**.
+    - Name the file `portainer-compose.yml` and paste the content below. Replace the volume path with the correct path to your `RemoteSystemData` shared folder.
+    - Click **Save**, then select the new file and click **Up**.
+
+    <details>
+      <summary>Click to show `portainer-compose.yml`</summary>
+
+    ```yaml
+    version: "3.8"
+    services:
+      portainer:
+        image: portainer/portainer-ce:latest
+        container_name: portainer
+        restart: unless-stopped
+        security_opt:
+          - no-new-privileges:true
+        ports:
+          - "9443:9443"
+          - "9000:9000"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /srv/dev-disk-by-uuid-xxxxxxxx/RemoteSystemData/PortainerData:/data
+    ```
+    </details>
+
+4.  **Deploy Webtop:**
+    - Access the Portainer UI at `https://<your-pi-ip>:9443`. Complete the initial setup.
+    - Go to **Stacks -> Add stack**.
+    - Name it `webtop` and paste the content below, again replacing the volume path.
+    - Click **Deploy the stack**. You can now access your remote desktop at `http://<your-pi-ip>:3000`.
+
+    <details>
+      <summary>Click to show `webtop-compose.yml`</summary>
+
+    ```yaml
+    version: "2.1"
+    services:
+      webtop:
+        image: lscr.io/linuxserver/webtop:latest
+        container_name: webtop
+        security_opt:
+          - seccomp:unconfined # Required for Docker in Docker
+        environment:
+          - PUID=1000
+          - PGID=1000
+          - TZ=Etc/UTC
+        volumes:
+          - /srv/dev-disk-by-uuid-xxxxxxxx/RemoteSystemData/WebtopConfig:/config
+          - /var/run/docker.sock:/var/run/docker.sock # Optional: For Docker in Docker
+        ports:
+          - "3000:3000"
+        restart: unless-stopped
+    ```
+    </details>
 
 ## Scripts & Automation
 
@@ -737,14 +813,12 @@ desktop.ini
     3.  Reboot the Raspberry Pi.
 -   **Windows Share 'Permission Denied':** Windows, by default, restricts remote administrative access to its drives.
     1.  Open Registry Editor (`regedit`) on your Windows PC.
-    2.  Navigate to `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System`.
-    3.  Create a new `DWORD (32-bit) Value`, name it `LocalAccountTokenFilterPolicy`, and set its value to `1`.
+    2.  Navigate to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters`.
+    3.  Find or create a `DWORD (32-bit) Value` named `AutoShareWks` and set its value to `1`.
     4.  Reboot your PC.
 -   **OMV Plugin Failures:** If a newly installed plugin is not working, try disabling the NTP server.
     -   In the OMV UI, go to **System -> Date & Time** and uncheck "Use NTP server".
 
-
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-```
