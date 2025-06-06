@@ -1,0 +1,10 @@
+# /etc/rsync/windows-d-drive-excludes.txt
+
+$RECYCLE.BIN/
+$Recycle.Bin/
+System Volume Information/
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*~
