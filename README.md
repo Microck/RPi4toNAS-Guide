@@ -81,6 +81,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - In the **Services** tab, enable **SSH** and select "Use password authentication".
     - Click **Save**, then **Write** to flash the OS.
 
+    ![Raspberry Pi Imager Configuration](https://github.com/user-attachments/assets/659f313b-4941-4104-956f-21c9b8e19e43)
+
 2.  **Boot and Connect:**
     - Insert the microSD card into the Raspberry Pi and power it on. **For the initial OMV installation, connect the Pi to your router via an Ethernet cable to avoid setup issues.**
     - On your PC, open a command prompt and use `nmap -sn YOUR_NETWORK_IP/24` (e.g., `192.168.1.0/24`) to find the IP address of the Raspberry Pi.
@@ -101,6 +103,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
     - Log in with the default credentials: username `admin` and password `openmediavault`.
     - Immediately navigate to **System -> General Settings -> Web Administrator Password** to change the default password.
 
+    ![OMV Login Screen](https://github.com/user-attachments/assets/e2516f5b-d1d0-41a5-b070-dc090034d1d9)
+
 ### Phase 4: Storage Configuration
 
 #### 4a. Command-Line LVM Setup
@@ -108,6 +112,8 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 **Logical Volume Management (LVM)** is a powerful tool that allows you to abstract your physical hard drives into a flexible pool of storage. We will use it to combine our two physical disks into one large, manageable volume.
 
 Connect to your Pi via SSH and run the following commands:
+
+![LVM Commands](https://github.com/user-attachments/assets/01234567-89ab-cdef-0123-456789abcdef)
 
 ```bash
 # Install the LVM2 package
@@ -142,6 +148,8 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Go to the **Shares** tab and click **Create**.
     - For each shared folder you created, create a corresponding SMB share. Make sure to set permissions as needed and enable the "Browseable" option if you want it to appear automatically in your network explorer.
 
+    ![OMV SMB Shares](https://github.com/user-attachments/assets/3051cb5f-dd36-46be-957b-8400ab498db7)
+
 ### Phase 5: Host PC Configuration
 
 1.  **Enable Wake-on-LAN (WOL):**
@@ -150,6 +158,8 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Find the setting for "Wake on LAN" or "Power On By PCI-E/PCI" and enable it. This location varies by motherboard manufacturer.
     - Save changes and exit.
 
+    ![BIOS WOL Setting](https://github.com/user-attachments/assets/1c93c04b-7886-451e-8774-d3a7ad86d45d)
+
 2.  **Enable Administrative Shares:**
     - On your Windows PC, open the Registry Editor (`regedit`).
     - Navigate to `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters`.
@@ -157,7 +167,7 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Double-click `AutoShareWks` and set its value to `1`.
     - Restart your PC for the change to take effect.
 
-![Windows Registry Editor showing AutoShareWks](https://github.com/user-attachments/assets/ac62c199-7d39-47af-9054-f38b34d3d82c)
+    ![Windows Registry Editor showing AutoShareWks](https://github.com/user-attachments/assets/ac62c199-7d39-47af-9054-f38b34d3d82c)
 
 ## Optional: Remote Desktop Setup (Docker & Webtop)
 
