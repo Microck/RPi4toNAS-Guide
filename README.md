@@ -245,7 +245,6 @@ sudo mkfs.ext4 -L NASDataPool /dev/nas_vg/data_lv
     - Click the **Deploy the container** button.
 
   Once deployed, your remote desktop will be accessible at `http://<your-pi-ip>:3000`.
-    ```
     </details>
 
 ![Screenshot_1172](https://github.com/user-attachments/assets/c737b4ee-f308-4cf7-a3db-e8ffea95beef)
