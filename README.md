@@ -40,16 +40,16 @@ This DIY NAS project is designed to provide a robust, personal data storage solu
 
 | Component | Model/Type | Quantity | Purchase Links |
 | :--- | :--- | :--- | :--- |
-| **SBC** | Raspberry Pi 4 (4GB+) | 1 | [AliExpress](https://www.aliexpress.com/item/1005006856494505.html) |
+| **SBC** | Raspberry Pi 4 (4GB+) | 1 | [AliExpress](https://s.click.aliexpress.com/e/_oC6u1Z2) |
 | **Storage** | 3.5"/2.5" SATA HDD | 1+ | - |
 | **Power Supply** | Official Raspberry Pi 4 PSU | 1 | [Amazon.es](https://www.amazon.es/dp/B07WKD71DX) |
-| **Adapters** | USB 3.0 to SATA Adapter | 1+ | [AliExpress](https://www.aliexpress.com/item/1005007457884791.html) Only choose Power Adapter if 3.5" |
+| **Adapters** | USB 3.0 to SATA Adapter | 1+ | [AliExpress](https://s.click.aliexpress.com/e/_oFXGbLO) Only choose Power Adapter if 3.5" |
 | **USB Hub** | Powered USB 3.0 Hub | 1 | [Amazon.es](https://www.amazon.es/dp/B09TGK6RH4) |
 | **Enclosure** | 3D-Printed Case | 1 | [Thingiverse](https://www.thingiverse.com/search?q=Raspberry+Pi+4+NAS) |
 | **SD Card** | microSD Card (16GB+) | 1 | [Amazon.es](https://www.amazon.es/dp/B019D6MKVI?ref_=ppx_hzsearch_conn_dt_b_fed_asin_title_1) |
-| **Cooling** | 30mm Fan | 1 | [Aliexpress](https://www.aliexpress.com/item/1005005029451364.html) |
+| **Cooling** | 30mm Fan | 1 | [Aliexpress](https://s.click.aliexpress.com/e/_oFcl2DW) |
 
-There's also [bundles](https://www.aliexpress.com/item/1005008228051693.html) that come with different pieces in the same order, you might be able to save some money if you buy those.
+There's also [bundles](https://s.click.aliexpress.com/e/_omc53K4) that come with different pieces in the same order, you might be able to save some money if you buy those.
 Sorry for the Amazon.es links, I genuinely couldn't figure out how to set up the global links that people use wtihout having to sign up to Amazon's affiliate program.
 
 > [!IMPORTANT]
