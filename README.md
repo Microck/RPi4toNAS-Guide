@@ -4,8 +4,8 @@ A comprehensive guide and set of scripts for creating a personal, low-cost Netwo
 
 This guide is based on the process detailed in the **[accompanying video tutorial](https://www.youtube.com/watch?v=your_video_link_here)**.
 
-![Final Assembled NAS](https://github.com/user-attachments/assets/d1a2b3c4-d5e6-f7a8-b9c0-d1e2f3a4b5c6)
-> *The final assembled NAS rig, ready for action.*
+![NAS AI-Generated](https://github.com/user-attachments/assets/ebcab8b6-a707-4f8f-9bd8-f9c53da356e8)
+
 
 ## Table of Contents
 
