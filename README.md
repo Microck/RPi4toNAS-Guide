@@ -2,7 +2,7 @@
 
 A comprehensive guide and set of scripts for creating a personal, low-cost Network Attached Storage (NAS) device using a Raspberry Pi 4. This project automates backups from your PC and remote servers, and provides a persistent, browser-accessible remote Linux desktop.
 
-This guide is based on the process detailed in the **[accompanying video tutorial](https://www.youtube.com/watch?v=your_video_link_here)**.
+This guide is based on the process detailed in the **[accompanying video tutorial](https://youtu.be/QN8jmzE3qDg)**.
 
 ![NAS AI-Generated](https://github.com/user-attachments/assets/ebcab8b6-a707-4f8f-9bd8-f9c53da356e8)
 
