@@ -744,7 +744,7 @@ exit 0
 
 ### Rsync Exclude Files
 
-These files contain lists of patterns for `rsync` to ignore, preventing unnecessary system files, caches, and temporary files from being backed up. Place them in `/etc/rsync/` on your Raspberry Pi.
+These files contain lists of patterns for `rsync` to ignore, preventing unnecessary system files, caches, and temporary files from being backed up.
 
 <details>
   <summary>
